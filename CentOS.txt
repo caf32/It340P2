@@ -1,0 +1,93 @@
+CentOS 
+
+<Problem 1>
+	Finding out the version 
+
+<-------------------------------------------->
+
+LAMP Stack
+
+Check Version
+	cat /etc/centos-release
+
+Install apache
+	sudo yum install httpd
+	sudo systemctl start httpd.service
+
+	//Enable apache on startup
+	sudo systemctl enable httpd.service
+
+Install mySQl
+	sudo yum install mariadb-server mariadb
+
+	//Start mySQl
+	sudo systemctl start mariadb
+
+Install PHP 
+	sudo yum install php php-mysql
+	sudo systemctl restart httpd.service
+
+	//Chck if php is working
+	sudo vi /var/www/html/info.php
+
+		//php script
+		<?php phpinfo(); ?>
+<-------------------------------------------->
+
+FTP
+
+	## created public HTML folder
+	sudo mkdir /var/www/html/public_html
+
+	##	Change permission to the public html
+	sudo chmod 777 public_html
+
+	#enable RHEL for centOS 7
+	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
+	rpm -ivh epel-release-7-6.noarch.rpm	
+
+	#	Install pure-ftpd 
+	yum install pure-ftpd
+
+	#	Configure pure-ftpd
+
+		UnixAuthentication		yes
+		VerboseLog				yes
+		PureDB
+		CreateHomeDir			yes
+
+		#change user quota to 1000 files and 1000Mb
+		1000:1000
+
+	# 	Create FTP user
+	pure-pw useradd ftpuser1 -u carlos -g carlos -d /var/www/public_html
+
+	#	Create user database
+	pure-pw mkdb
+		
+	#	Restart Service 
+	sudo service pure-ftpd restart
+
+	#	Intalls filezilla and test connectivity
+	sudo yum install filezilla
+
+	# 	Check user quota 
+	sudo vi /etc/pure-ftpd/pureftpd.passwd
+<————————————-------------------------------------------->
+
+Nagios
+
+	cd /tmp
+	wget http://assets.nagios.com/downloads/nagiosxi/xi-latest.tar.gz
+	tar xzf xi-latest.tar.gz
+	cd /tmp/nagiosxi
+	./fullinstall
+
+Nagios 
+	wget http://assets.nagios.com/downloads/nagiosxi/agents/linux-nrpe-agent.tar.gz
+	tar xzf linux-nrpe-agent.tar.gz
+	cd linux-nrpe-agent 
+	./fullinstall 
+<----------------------------------------------------------->
+
+
