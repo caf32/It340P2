@@ -1,0 +1,9 @@
+NagiosXI information
+
+Progam URl		http://localhost/nagiosxi/
+Administrator Name	Nagios Admnistrator
+Administrator Email	root@localhost
+administrator Username	nagiosadmin
+Adminstrator pass	bhcjrs
+
+
